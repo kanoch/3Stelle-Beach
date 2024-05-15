@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spiaggia</title>
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        position: relative;
+    }
+    .sea {
+        background-color: #0077be;
+        width: 100%;
+        height: 15%;
+    }
+    .beach {
+        background-color: #deb887; 
+        width: 100%;
+        height: 100%;
+        
+        bottom: 0;
+    }
+    .sand {
+        background-color: #deb887; 
+        width: 100%;
+        height: 100%;
+       
+    }
+	 .umbrella{
+        background-color: #FFFFFF; 
+		background-size: cover;
+        width: 6%;
+        height: 9%;
+		margin:0.7%;
+		display: inline-block;
+        
+    }
+    .unclickable {
+    pointer-events: none;
+    }
+
+	 .line-container {
+	 text-align: center;
+     width: 100%;
+	 margin-bottom:3%;
+    }
+	.pedana{
+		
+		background-size: cover; 
+        width: 3%;
+        height: 3%;
+		margin:1%;
+		display: inline-block;
+	}
+    .outer-rectangle {
+        width: 30%;
+        height: 10%;
+        border: 2px solid black;
+        margin-top: 1%;
+        margin-left: 10%;
+       
+    }
+    .inner-rectangle {
+        width: 60%;
+        height: 30px;
+        background-color: red;
+        margin: 6%;
+        margin-left: 20%;
+       
+    }
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+    }
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+   
+</style>
+</head>
+<body onload="caricaPagina()">
+
+<div class="container">
+    <div class="sea"></div>
+    <div class="beach">
+        <div class="sand">
+		 <div class="line-container">
+                <img src="umbrella-available.svg" id="L01" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L02" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L03" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L04" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L05" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="footboard-vertical.svg" class="pedana">
+                <img src="umbrella-available.svg" id="L06" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L07" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L08" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L09" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L10" class="umbrella Unselected" data-umbrellaQuantity="2">
+            </div>
+            <div class="line-container">
+                <img src="umbrella-available.svg" id="L11" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L12" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L13" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L14" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L15" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="footboard-vertical.svg" class="pedana">
+                <img src="umbrella-available.svg" id="L16" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L17" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L18" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L19" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L20" class="umbrella Unselected" data-umbrellaQuantity="2">
+            </div>
+            <div class="line-container">
+                <img src="umbrella-available.svg" id="L21" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L22" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L23" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L24" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L25" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="footboard-vertical.svg" class="pedana">
+                <img src="umbrella-available.svg" id="L26" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L27" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L28" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L29" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L30" class="umbrella Unselected" data-umbrellaQuantity="2">
+            </div>
+            <div class="line-container">
+                <img src="umbrella-available.svg" id="L31" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L32" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L33" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L34" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L35" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="footboard-vertical.svg" class="pedana">
+                <img src="umbrella-available.svg" id="L36" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L37" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L38" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L39" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L40" class="umbrella Unselected" data-umbrellaQuantity="2">
+            </div>
+            <div class="line-container">
+                <img src="umbrella-available.svg" id="L41" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L42" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L43" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L44" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L45" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="footboard-vertical.svg" class="pedana">
+                <img src="umbrella-available.svg" id="L46" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L47" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L48" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L49" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L50" class="umbrella Unselected" data-umbrellaQuantity="2">
+            </div>
+            <div class="line-container">
+                <img src="umbrella-available.svg" id="L51" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L52" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L53" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L54" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L55" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="footboard-vertical.svg" class="pedana">
+                <img src="umbrella-available.svg" id="L56" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L57" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L58" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L59" class="umbrella Unselected" data-umbrellaQuantity="2">
+                <img src="umbrella-available.svg" id="L60" class="umbrella Unselected" data-umbrellaQuantity="2">
+            </div>
+             <div >
+                <div class="outer-rectangle">
+                <div class="inner-rectangle"></div>
+            </div>
+		
+		</div>
+    </div>
+</div>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+	  <p>Ombrellone Numero: <span id="umbrellaNum"></span></p>
+      <p>Prezzo del lettino: <span id="price"></span>Euro</p>
+        <p id="freeSpot">Lettini X2</p>
+        <p id="umbrellaAsk">Hai bisogno di un lettino in più? <button onclick="addSpot()">Aggiungi un posto</button></p>
+       <div class="modal-buttons">
+            <button onclick="addLettino()">Conferma</button>
+            <button onclick="closeModal()">Chiudi</button>
+        </div>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+    function openModal(umbrellaId) {
+    var modal = document.getElementById("myModal");
+    var priceSpan = document.getElementById("price");
+	var numberSpan = document.getElementById("umbrellaNum");
+	const umbrellaPrice = document.getElementById(umbrellaId).getAttribute("data-umbrellaPrice");
+	numberSpan.innerHTML = umbrellaId;
+    priceSpan.innerHTML = umbrellaPrice;
+    modal.style.display = "block";
+}
+
+function closeModal() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+
+    const origin = document.getElementById("freeSpot");
+    origin.innerHTML="Lettini X2";
+    const questionP = document.getElementById("umbrellaAsk");
+    questionP.style.visibility="visible";
+
+    const umbrellaId = document.getElementById("umbrellaNum").innerHTML;
+    var pressedBtn = document.getElementById(umbrellaId);
+    pressedBtn.setAttribute("data-umbrellaQuantity",2);
+    pressedBtn.classList.remove("Full");
+}
+
+function addLettino() {
+    const umbrellaId = document.getElementById("umbrellaNum").innerHTML;
+    var pressedBtn = document.getElementById(umbrellaId);
+    pressedBtn.src="umbrella-checked.svg";
+	pressedBtn.classList.remove("Unselected");
+	window.Android.insertSelectedUmbrella(umbrellaId,100,pressedBtn.getAttribute("data-umbrellaQuantity"));
+    closeModal();
+}
+function addSpot(){
+    const origin = document.getElementById("freeSpot");
+    origin.innerHTML="Lettini X3";
+    const questionP = document.getElementById("umbrellaAsk");
+    questionP.style.visibility="hidden";
+    const umbrellaId = document.getElementById("umbrellaNum").innerHTML;
+    var pressedBtn = document.getElementById(umbrellaId);
+    pressedBtn.setAttribute("data-umbrellaQuantity",3);
+    pressedBtn.classList.add("Full");
+    const priceSpan = document.getElementById("price");
+
+    const newPrice = parseFloat(priceSpan.innerHTML)+ 7;
+    priceSpan.innerHTML=newPrice;
+}
+
+function disableUmbrellas(unavaibleUmbrellaList) {
+    var arrayList = JSON.parse(unavaibleUmbrellaList);
+    arrayList.forEach(function(element) {
+    document.getElementById(element).src="umbrella-not-available.svg";
+    document.getElementById(element).classList.add("unclickable");
+    });
+}
+
+function setUmbrellasPrices(pricesHashMap){
+    var hashMap = JSON.parse(pricesHashMap);
+    for (var key in hashMap) {
+    if (hashMap.hasOwnProperty(key)) {
+        var valuePrice = hashMap[key];
+        document.getElementById(key).setAttribute("data-umbrellaPrice",valuePrice);
+    }
+}
+}
+
+function caricaPagina(){
+    window.Android.chargeUmbrellaInfo();
+}
+
+const listaLettini= document.querySelectorAll(".umbrella");
+listaLettini.forEach(element => {
+    element.addEventListener("click",function() {
+    if (element.classList.contains("Unselected")) {
+		    openModal(element.id);
+	} else{
+			element.classList.add("Unselected");
+            element.classList.remove("Full");
+			element.src="umbrella-available.svg";
+            element.setAttribute("data-umbrellaQuantity",2);
+			window.Android.removeSelectedUmbrella(element.id);
+	}
+    })
+});
+</script>
+</html>

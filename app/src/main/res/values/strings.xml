@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">App3Stelle</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_history">I Miei Ordini</string>
+    <string name="menu_coupons">I Miei Coupon</string>
+    <string name="menu_out">Esci</string>
+    <string name="message_freeUmbrella">Vuoi avvisare che non utilizzerai il tuo
+        ombrellone per qualche giorno? In cambio riceverei dei buoni utilizzabili
+    presso il bar</string>
+
+    <string-array name="opzioni_array">
+        <item>Numero Tavolo</item>
+        <item>Numero Ombrellone</item>
+    </string-array>
+</resources>

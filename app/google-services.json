@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "659049219354",
+    "firebase_url": "https://bagno3stelle-84b06-default-rtdb.firebaseio.com",
+    "project_id": "bagno3stelle-84b06",
+    "storage_bucket": "bagno3stelle-84b06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659049219354:android:da87cafa6f4c5468f6d8a3",
+        "android_client_info": {
+          "package_name": "com.example.app3stelle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPAuGdJgwb55S3EZlWKhBLcErnt8MmrRw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
