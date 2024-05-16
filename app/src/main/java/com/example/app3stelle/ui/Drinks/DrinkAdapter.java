@@ -2,13 +2,16 @@ package com.example.app3stelle.ui.Drinks;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app3stelle.R;
@@ -22,29 +25,43 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
     private Context context;
     private MySharedData sharedData = MySharedData.getInstance();
     private ArrayList<Drink> sharedDrinkList = sharedData.getSharedDrinkMap();
+    private FragmentManager fragmentManager;
 
-    public DrinkAdapter(Context context, ArrayList<Drink> drinksList) {
+    public DrinkAdapter(Context context, ArrayList<Drink> drinksList,FragmentManager fragmentManager) {
         this.context = context;
         this.drinkList = drinksList;
+        this.fragmentManager = fragmentManager;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.drinks_row_layout, parent, false);
-        return new ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.drinks_layout3, parent, false);
+        return new ViewHolder(view,fragmentManager);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Drink drink = drinkList.get(position);
-        String drinkPrice = "Drink: "+ drink.getDrinkPrice()+"€";
+        String drinkPrice = drink.getDrinkPrice()+"€";
         String caraffaPrice = "Caraffa: "+ drink.getCaraffaPrice()+"€";
         holder.drinkNameTextView.setText(drink.getDrinkName());
+        String src= drink.getDrinkName().toLowerCase().replace(' ','_');
+        int drawableId = context.getResources().getIdentifier(src, "drawable", context.getPackageName());
+        if(drawableId!=0){
+            holder.drinkImage.setImageResource(drawableId);
+        }
         holder.textViewIncredient.setText(drink.getIngredients());
         holder.textViewPrice.setText(drinkPrice);
-        holder.textViewCaraffaPrice.setText(caraffaPrice);
-        holder.btnAddDrink.setOnClickListener(v -> showSizeDialog(drink));
+        //holder.textViewCaraffaPrice.setText(caraffaPrice);
+        //holder.btnAddDrink.setOnClickListener(v -> showSizeDialog(drink));
+        holder.btnAddDrink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDrinks.newInstance(drink).show(
+                        fragmentManager, "dialog");
+            }
+        });
     }
 
     @Override
@@ -59,15 +76,20 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
         TextView textViewPrice;
         TextView textViewCaraffaPrice;
         Button btnAddDrink;
+        ImageView drinkImage;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView,FragmentManager fragmentManager) {
             super(itemView);
+            //fragmentManager = fragmentManager;
             drinkNameTextView = itemView.findViewById(R.id.drinkNameTextView);
             textViewIncredient = itemView.findViewById(R.id.textViewIncredient);
             textViewPrice = itemView.findViewById(R.id.textViewPriceDrink);
             btnAddDrink = itemView.findViewById(R.id.buttonAddDrink);
-            textViewCaraffaPrice = itemView.findViewById(R.id.textViewPriceCaraffa);
+           // textViewCaraffaPrice = itemView.findViewById(R.id.textViewPriceCaraffa);
+            drinkImage = itemView.findViewById(R.id.drinkView);
+
         }
+
     }
 
     private void showSizeDialog(Drink drink) {

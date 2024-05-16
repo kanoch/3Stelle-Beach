@@ -50,7 +50,7 @@ public class DrinkSelectionWindow extends AppCompatActivity {
                     Drink temp = new Drink(drinkName,drinkPrice,drinkIngredients,drinkPriceCaraffa);
                     drinkList.add(temp);
                 }
-                DrinkAdapter adapter = new DrinkAdapter(DrinkSelectionWindow.this,drinkList);
+                DrinkAdapter adapter = new DrinkAdapter(DrinkSelectionWindow.this,drinkList,getSupportFragmentManager());
                 recyclerView.setAdapter(adapter);
             }
             @Override
