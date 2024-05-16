@@ -1,15 +1,12 @@
 package com.example.app3stelle.ui.Drinks;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +41,6 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Drink drink = drinkList.get(position);
         String drinkPrice = drink.getDrinkPrice()+"€";
-        String caraffaPrice = "Caraffa: "+ drink.getCaraffaPrice()+"€";
         holder.drinkNameTextView.setText(drink.getDrinkName());
         String src= drink.getDrinkName().toLowerCase().replace(' ','_');
         int drawableId = context.getResources().getIdentifier(src, "drawable", context.getPackageName());
@@ -53,8 +49,6 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
         }
         holder.textViewIncredient.setText(drink.getIngredients());
         holder.textViewPrice.setText(drinkPrice);
-        //holder.textViewCaraffaPrice.setText(caraffaPrice);
-        //holder.btnAddDrink.setOnClickListener(v -> showSizeDialog(drink));
         holder.btnAddDrink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,39 +68,18 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
         TextView drinkNameTextView;
         TextView textViewIncredient;
         TextView textViewPrice;
-        TextView textViewCaraffaPrice;
         Button btnAddDrink;
         ImageView drinkImage;
 
         public ViewHolder(@NonNull View itemView,FragmentManager fragmentManager) {
             super(itemView);
-            //fragmentManager = fragmentManager;
             drinkNameTextView = itemView.findViewById(R.id.drinkNameTextView);
             textViewIncredient = itemView.findViewById(R.id.textViewIncredient);
             textViewPrice = itemView.findViewById(R.id.textViewPriceDrink);
             btnAddDrink = itemView.findViewById(R.id.buttonAddDrink);
-           // textViewCaraffaPrice = itemView.findViewById(R.id.textViewPriceCaraffa);
             drinkImage = itemView.findViewById(R.id.drinkView);
 
         }
 
-    }
-
-    private void showSizeDialog(Drink drink) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("Preferisci un Drink singolo oppure una Caraffa?")
-                .setPositiveButton("Drink Singolo", (dialog, id) -> {
-                    drink.setDrinkSize("Singolo");
-                    sharedDrinkList.add(drink);
-                    Toast.makeText(context, "Drink Aggiunto all' ordine", Toast.LENGTH_SHORT).show();
-                })
-                .setNegativeButton("Caraffa", (dialog, id) ->{
-                    drink.setDrinkSize("Caraffa");
-                    sharedDrinkList.add(drink);
-                    Toast.makeText(context, "Drink Aggiunto all' ordine", Toast.LENGTH_SHORT).show();
-                    //dialog.dismiss();
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 }

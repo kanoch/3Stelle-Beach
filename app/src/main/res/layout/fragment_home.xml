@@ -7,13 +7,14 @@
     tools:context=".ui.home.HomeFragment">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="391dp"
-        android:layout_height="730dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/beach">
 
         <LinearLayout
             android:layout_width="match_parent"
