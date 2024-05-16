@@ -24,7 +24,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/CardLettini"
-                android:layout_width="369dp"
+                android:layout_width="wrap_content"
                 android:layout_height="208dp"
                 android:layout_marginBottom="40dp"
                 app:cardCornerRadius="15dp">
@@ -79,7 +79,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/CardMenu"
-                android:layout_width="369dp"
+                android:layout_width="wrap_content"
                 android:layout_height="209dp"
                 android:layout_marginBottom="40dp"
                 app:cardCornerRadius="15dp">
@@ -133,7 +133,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/CardDrink"
-                android:layout_width="369dp"
+                android:layout_width="wrap_content"
                 android:layout_height="209dp"
                 app:cardCornerRadius="15dp">
 
