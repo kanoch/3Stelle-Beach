@@ -21,7 +21,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
     private ArrayList<Drink> drinkList;
     private Context context;
     private MySharedData sharedData = MySharedData.getInstance();
-    private ArrayList<Drink> sharedDrinkList = sharedData.getSharedDrinkMap();
+    private ArrayList<Drink> sharedDrinkList = sharedData.getSharedOrderDrinkList();
     private FragmentManager fragmentManager;
 
     public DrinkAdapter(Context context, ArrayList<Drink> drinksList,FragmentManager fragmentManager) {

@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class MySharedData {
     private static MySharedData instance;
     private HashMap<String,Double> sharedUmbrellaCartList = new HashMap<>();
-    private ArrayList<Drink> sharedDrinkMap = new ArrayList<>();
+    private ArrayList<Drink> sharedOrderDrinkList = new ArrayList<>();
     private String userId;
     private String userMail;
     private boolean findId = false;
@@ -27,24 +27,26 @@ public class MySharedData {
     public HashMap<String,Double> getSharedUmbrellaCartList(){
         return this.sharedUmbrellaCartList;
     }
-    public ArrayList<Drink> getSharedDrinkMap(){
-        return this.sharedDrinkMap;
+    public ArrayList<Drink> getSharedOrderDrinkList(){
+        return this.sharedOrderDrinkList;
     }
     public double getTotalUmbrellaCart(){
        return sharedUmbrellaCartList.values().stream().mapToDouble(Double::doubleValue).sum();
 
     }
     public double getTotalCartDrink(){
-        return sharedDrinkMap.stream()
+        return sharedOrderDrinkList.stream()
                 .mapToDouble(drink -> Double.parseDouble(drink.getFinalPrice()))
                 .sum();
 
     }
     public String getFullOrderDescription(){
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < sharedDrinkMap.size(); i++) {
-            stringBuilder.append(sharedDrinkMap.get(i).getDrinkName());
-            if (i < sharedDrinkMap.size() - 1) {
+        for (int i = 0; i < sharedOrderDrinkList.size(); i++) {
+            stringBuilder.append(sharedOrderDrinkList.get(i).getDrinkSize());
+            stringBuilder.append(" ");
+            stringBuilder.append(sharedOrderDrinkList.get(i).getDrinkName());
+            if (i < sharedOrderDrinkList.size() - 1) {
                 stringBuilder.append(", ");
             }
         }

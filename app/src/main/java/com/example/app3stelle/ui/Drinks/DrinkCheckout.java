@@ -39,7 +39,7 @@ public class DrinkCheckout extends AppCompatActivity {
         String totaleEuro = sharedData.getTotalCartDrink() +" €";
         totalTextView.setText(totaleEuro);
 
-        DrinkCheckOut_Adapter adapter = new DrinkCheckOut_Adapter(sharedData.getSharedDrinkMap());
+        DrinkCheckOut_Adapter adapter = new DrinkCheckOut_Adapter(sharedData.getSharedOrderDrinkList());
         recyclerView.setAdapter(adapter);
 
 
@@ -75,7 +75,7 @@ public class DrinkCheckout extends AppCompatActivity {
                     refOrdini.setValue(itm);
 
                     refOrdini.setValue(itm, (databaseError, databaseReference) -> {
-                        sharedData.getSharedDrinkMap().clear();
+                        sharedData.getSharedOrderDrinkList().clear();
                         if (databaseError != null) {
                             showConfirmationOrderDialog("Errore nell'invio");
                         } else {
