@@ -80,7 +80,7 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView,Context cont) {
             super(itemView);
             itemView.setOnLongClickListener(this);
-            destinationTextView = itemView.findViewById(R.id.destinationTextView);
+            destinationTextView = itemView.findViewById(R.id.clientNameTextView);
             textViewDrinkList = itemView.findViewById(R.id.textViewDrinkList);
             textViewPrice = itemView.findViewById(R.id.textViewPriceDrink);
             this.cont= cont;

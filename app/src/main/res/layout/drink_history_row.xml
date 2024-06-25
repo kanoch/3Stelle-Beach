@@ -18,13 +18,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/destinationTextView"
+                android:id="@+id/clientNameTextView"
                 android:layout_width="389dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="Ombrellone Numero: 10"
+                android:text="Marco"
+                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -40,12 +41,13 @@
 
             <TextView
                 android:id="@+id/textViewPriceDrink"
-                android:layout_width="match_parent"
+                android:layout_width="373dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="7€"
+                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold" />

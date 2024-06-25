@@ -3,11 +3,9 @@ package com.example.app3stelle.ui.Drinks;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class DrinkCheckout extends AppCompatActivity {
     private MySharedData sharedData = MySharedData.getInstance();
-    private  Spinner spinner;
     private EditText editTextNumberDelivery;
 
     @Override
@@ -48,29 +45,22 @@ public class DrinkCheckout extends AppCompatActivity {
             startActivity(intent);
         });
 
-        spinner = findViewById(R.id.spinnerDelivery);
-        ArrayAdapter<CharSequence> adapterSpinner = ArrayAdapter.createFromResource(this,
-                R.array.opzioni_array, android.R.layout.simple_spinner_item);
-
-        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapterSpinner);
-
         buttonCheckout.setOnClickListener(v -> showConfirmationDialog());
     }
 
     private void showConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Vuoi inviare l'ordine al bar? \n"+spinner.getSelectedItem()+": "+editTextNumberDelivery.getText())
+        builder.setMessage("Vuoi inviare l'ordine al bar? \n"+"Potrai ritirarlo con il nome: "+editTextNumberDelivery.getText())
                 .setPositiveButton("Conferma", (dialog, id) -> {
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference refOrdini = database.getReference("Ordini Drink").push();
                     String orderDescription = sharedData.getFullOrderDescription();
-                    String orderDestination = spinner.getSelectedItem()+": "+editTextNumberDelivery.getText();
+                    String clientName = editTextNumberDelivery.getText().toString();
 
                     OrderItem itm = new OrderItem(
                             sharedData.getTotalCartDrink(),
                             orderDescription,
-                            orderDestination,
+                            clientName,
                             sharedData.getUserId());
                     refOrdini.setValue(itm);
 

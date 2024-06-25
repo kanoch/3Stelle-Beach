@@ -29,17 +29,14 @@ import it.custom.printer.api.android.CustomException;
 import it.custom.printer.api.android.CustomPrinter;
 import it.custom.printer.api.android.PrinterFont;
 
-public class provaResoconto extends AppCompatActivity {
+public class provaResoconto extends AppCompatActivity implements printInterface{
     private String lock="lockAccess";
     static CustomPrinter prnDevice = null;
-    EditText ipText=null;
     ArrayList<RowElement> drinksList=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.driks_resume_bar_layout);
-
-        ipText=findViewById(R.id.editTextIp);
 
         drinksList= new ArrayList<>();
         final RecyclerView recyclerViewBeverage = findViewById(R.id.listDrinks);
@@ -49,12 +46,12 @@ public class provaResoconto extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String description = snapshot.child("descrizione").getValue(String.class);
-                    String destination = snapshot.child("destinazione").getValue(String.class);
+                    String clientName = snapshot.child("clientName").getValue(String.class);
                     Double drinkPrice= snapshot.child("prezzo").getValue(Double.class);
-                    RowElement temp = new RowElement(destination,String.valueOf(drinkPrice),description);
+                    RowElement temp = new RowElement(clientName,String.valueOf(drinkPrice),description);
                     drinksList.add(temp);
                 }
-                orderOfDrinksAdapter adapter = new orderOfDrinksAdapter(drinksList, provaResoconto.this);
+                orderOfDrinksAdapter adapter = new orderOfDrinksAdapter(drinksList, provaResoconto.this,provaResoconto.this);
                 recyclerViewBeverage.setAdapter(adapter);
                 recyclerViewBeverage.setLayoutManager(new LinearLayoutManager(provaResoconto.this));
             }
@@ -64,16 +61,17 @@ public class provaResoconto extends AppCompatActivity {
 
             }
         });
+        OpenDevice();
 
 }
-    public void onPrintText(View view)
+    /*public void onPrintText(View view)
     {
         OpenDevice();
         if (prnDevice == null)
             return;
         new PrintTextBGTask().execute();
 
-    }
+    }*/
 
     //Open the device if it isn't already opened
     public boolean OpenDevice()
@@ -102,6 +100,14 @@ public class provaResoconto extends AppCompatActivity {
         dialogBuilder.setMessage(msg);
         dialogBuilder.show();
 
+    }
+
+    @Override
+    public void printOrder() {
+        Toast.makeText(this,"Stampooo",Toast.LENGTH_LONG).show();
+       /* if (prnDevice == null)
+            return;
+        new PrintTextBGTask().execute();*/
     }
 
     class PrintTextBGTask extends AsyncTask<String , Integer, Void>
@@ -190,7 +196,7 @@ public class provaResoconto extends AppCompatActivity {
             try
             {
                 //Open and connect it
-                prnDevice = new CustomAndroidAPI().getPrinterDriverETH(ipText.getText().toString(), 9100);
+                prnDevice = new CustomAndroidAPI().getPrinterDriverETH("172.16.0.204", 9100);
             }
             catch(CustomException e )
             {

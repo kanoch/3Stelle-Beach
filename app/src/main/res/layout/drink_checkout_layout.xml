@@ -104,18 +104,21 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.0">
 
-        <Spinner
-            android:id="@+id/spinnerDelivery"
-            android:layout_width="222dp"
-            android:layout_height="43dp" />
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Inserisci un nome:"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextNumberDelivery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
+            android:ems="10" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

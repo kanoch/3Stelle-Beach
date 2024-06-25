@@ -1,51 +1,33 @@
 package com.example.app3stelle.ui.Drinks;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.app3stelle.MainActivity;
 import com.example.app3stelle.R;
-import com.example.app3stelle.ui.MySharedData;
-import com.example.app3stelle.ui.history.CouponManager;
-import com.example.app3stelle.ui.history.RowAdapter;
 import com.example.app3stelle.ui.history.RowElement;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdapter.ViewHolder> {
 
     private ArrayList<RowElement> rowElements;
     private Context contex;
+    private printInterface printInterface;
 
-    public orderOfDrinksAdapter(ArrayList<RowElement> rowElements, Context context) {
+    public orderOfDrinksAdapter(ArrayList<RowElement> rowElements, Context context, printInterface printInterface) {
         this.rowElements = rowElements;
         this.contex = context;
+        this.printInterface = printInterface;
 
     }
 
@@ -59,11 +41,11 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
     @Override
     public void onBindViewHolder(@NonNull orderOfDrinksAdapter.ViewHolder holder, int position) {
         RowElement element = rowElements.get(position);
-        String drinkDestination = element.getDestination();
+        String clientName = element.getDestination();
         String drinkList = element.getDrinkList();
         String orderPrice = element.getDrinkPrice()+"€";
         holder.textViewDrinkList.setText(drinkList);
-        holder.destinationTextView.setText(drinkDestination);
+        holder.clientNameTextView.setText(clientName);
         holder.textViewPrice.setText(orderPrice);
     }
 
@@ -79,7 +61,7 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView destinationTextView;
+        TextView clientNameTextView;
         TextView textViewDrinkList;
         TextView textViewPrice;
         CardView cardViewBox;
@@ -88,7 +70,7 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
         public ViewHolder(@NonNull View itemView,Context cont,orderOfDrinksAdapter adapter) {
             super(itemView);
             itemView.setOnClickListener(this);
-            destinationTextView = itemView.findViewById(R.id.destinationTextView);
+            clientNameTextView = itemView.findViewById(R.id.clientNameTextView);
             textViewDrinkList = itemView.findViewById(R.id.textViewDrinkList);
             textViewPrice = itemView.findViewById(R.id.textViewPriceDrink);
             cardViewBox = itemView.findViewById(R.id.cardViewBox);
@@ -96,11 +78,13 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
             this.adapter = adapter;
         }
 
-        private void showDialog(Context context,String color){
+        private void showDialog(Context context,String color,String message){
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage(R.string.message_freeUmbrella)
+            builder.setMessage(message)
                     .setPositiveButton("Prosegui", (dialog, id) -> {
                         cardViewBox.setCardBackgroundColor(Color.parseColor(color));
+                        if(cardViewBox.getCardBackgroundColor().getDefaultColor() == ContextCompat.getColor(cont, R.color.readyGreen))
+                            adapter.printInterface.printOrder();
                     })
                     .setNegativeButton("Annulla", (dialog, id) -> dialog.dismiss());
             AlertDialog dialog = builder.create();
@@ -114,10 +98,10 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
             int cardBackgroundColor = cardViewBox.getCardBackgroundColor().getDefaultColor();
             if (position != RecyclerView.NO_POSITION) {
                 if(cardBackgroundColor == Color.WHITE){
-                    showDialog(cont,"#FFC400");
-                }else if(cardBackgroundColor == Color.parseColor("#FFC400")){
-                    showDialog(cont,"#76FF03");
-                }else if(cardBackgroundColor == Color.parseColor("#76FF03")){
+                    showDialog(cont,"#FFC400", cont.getString(R.string.message_updateOrder));
+                }else if(cardBackgroundColor == ContextCompat.getColor(cont, R.color.yellow)){
+                    showDialog(cont,"#76FF03",cont.getString(R.string.message_completeOrder));
+                }else if(cardBackgroundColor == ContextCompat.getColor(cont, R.color.readyGreen)){
                     adapter.removeItem(position);
                 }
             }

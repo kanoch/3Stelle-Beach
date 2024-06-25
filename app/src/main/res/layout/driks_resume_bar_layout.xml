@@ -7,39 +7,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listDrinks"
-        android:layout_width="407dp"
-        android:layout_height="481dp"
-        android:layout_marginBottom="46dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextIp"
+        android:layout_width="400dp"
+        android:layout_height="860dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/buttonStampa"
-        android:layout_width="131dp"
-        android:layout_height="66dp"
-        android:layout_marginBottom="96dp"
-        android:onClick="onPrintText"
-        android:text="Stampa"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextIp"
-        android:layout_width="284dp"
-        android:layout_height="69dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="IP Number"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/buttonStampa"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listDrinks" />
 </androidx.constraintlayout.widget.ConstraintLayout>
