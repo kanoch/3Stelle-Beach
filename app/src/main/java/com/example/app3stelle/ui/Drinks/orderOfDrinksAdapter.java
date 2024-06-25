@@ -78,13 +78,13 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
             this.adapter = adapter;
         }
 
-        private void showDialog(Context context,String color,String message){
+        private void showDialog(Context context,String color,String message, int position){
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setMessage(message)
                     .setPositiveButton("Prosegui", (dialog, id) -> {
                         cardViewBox.setCardBackgroundColor(Color.parseColor(color));
                         if(cardViewBox.getCardBackgroundColor().getDefaultColor() == ContextCompat.getColor(cont, R.color.readyGreen))
-                            adapter.printInterface.printOrder();
+                            adapter.printInterface.printOrder(position);
                     })
                     .setNegativeButton("Annulla", (dialog, id) -> dialog.dismiss());
             AlertDialog dialog = builder.create();
@@ -98,9 +98,9 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
             int cardBackgroundColor = cardViewBox.getCardBackgroundColor().getDefaultColor();
             if (position != RecyclerView.NO_POSITION) {
                 if(cardBackgroundColor == Color.WHITE){
-                    showDialog(cont,"#FFC400", cont.getString(R.string.message_updateOrder));
+                    showDialog(cont,"#FFC400", cont.getString(R.string.message_updateOrder),0);
                 }else if(cardBackgroundColor == ContextCompat.getColor(cont, R.color.yellow)){
-                    showDialog(cont,"#76FF03",cont.getString(R.string.message_completeOrder));
+                    showDialog(cont,"#76FF03",cont.getString(R.string.message_completeOrder),position);
                 }else if(cardBackgroundColor == ContextCompat.getColor(cont, R.color.readyGreen)){
                     adapter.removeItem(position);
                 }
