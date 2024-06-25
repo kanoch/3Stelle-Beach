@@ -39,7 +39,7 @@ public class DrinkCheckout extends AppCompatActivity {
         String totaleEuro = sharedData.getTotalCartDrink() +" €";
         totalTextView.setText(totaleEuro);
 
-        DrinkCheckOut_Adapter adapter = new DrinkCheckOut_Adapter(sharedData.getSharedOrderDrinkList());
+        DrinkCheckOut_Adapter adapter = new DrinkCheckOut_Adapter(sharedData.getSharedOrderDrinkList(),getApplicationContext());
         recyclerView.setAdapter(adapter);
 
 

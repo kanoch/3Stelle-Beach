@@ -4,10 +4,10 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="7dp"
-
     android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewBox"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

@@ -1,4 +1,4 @@
-package com.example.app3stelle.ui.gallery;
+package com.example.app3stelle.ui.history;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

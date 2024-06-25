@@ -1,7 +1,7 @@
 package com.example.app3stelle.ui.Drinks;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app3stelle.R;
 import com.example.app3stelle.ui.MySharedData;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -22,9 +20,11 @@ public class DrinkCheckOut_Adapter extends RecyclerView.Adapter<DrinkCheckOut_Ad
 
     private ArrayList<Drink> drinkList;
     private MySharedData sharedData = MySharedData.getInstance();
+    private Context contex;
 
-    public DrinkCheckOut_Adapter(ArrayList<Drink> drinks) {
+    public DrinkCheckOut_Adapter(ArrayList<Drink> drinks, Context contex) {
         this.drinkList = drinks;
+        this.contex = contex;
     }
 
     @NonNull
@@ -37,7 +37,9 @@ public class DrinkCheckOut_Adapter extends RecyclerView.Adapter<DrinkCheckOut_Ad
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Drink drink = drinkList.get(position);
-        holder.imageViewLettino.setImageResource(R.drawable.cocktail_immagine);
+        String src= drink.getDrinkName().toLowerCase().replace(' ','_');
+        int drawableId = contex.getResources().getIdentifier(src, "drawable", contex.getPackageName());
+        holder.imageViewLettino.setImageResource(drawableId);
         holder.textViewNumeroLettino.setText(drink.getDrinkName());
         holder.textViewDataPrenotazione.setText(drink.getIngredients());
         if(drink.getDrinkSize()=="Singolo"){

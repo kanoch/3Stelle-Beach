@@ -1,4 +1,4 @@
-package com.example.app3stelle.ui.slideshow;
+package com.example.app3stelle.ui.umbrellas;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
