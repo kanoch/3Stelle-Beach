@@ -43,7 +43,8 @@ public class HistoryFragment extends Fragment {
                     String description = snapshot.child("descrizione").getValue(String.class);
                     String destination = snapshot.child("destinazione").getValue(String.class);
                     Double drinkPrice= snapshot.child("prezzo").getValue(Double.class);
-                    RowElement temp = new RowElement(destination,String.valueOf(drinkPrice),description);
+                    int state = snapshot.child("state").getValue(int.class);
+                    RowElement temp = new RowElement(destination,String.valueOf(drinkPrice),description,state);
                     drinksList.add(temp);
                 }
                 RowAdapter adapter = new RowAdapter(drinksList, requireContext());
@@ -67,7 +68,7 @@ public class HistoryFragment extends Fragment {
                     String umbrellaNumber = snapshot.child("numeroLettino").getValue(String.class);
                     String umbrellaPeriod = snapshot.child("period").getValue(String.class);
                     String umbrellaPrice= String.valueOf(snapshot.child("prezzo").getValue(Double.class));
-                    RowElement temp = new RowElement(dataOrder+"\t"+umbrellaPeriod,umbrellaPrice,umbrellaNumber);
+                    RowElement temp = new RowElement(dataOrder+"\t"+umbrellaPeriod,umbrellaPrice,umbrellaNumber,0);
                     umbrellaList.add(temp);
                 }
                 RowAdapter adapter = new RowAdapter(umbrellaList,requireContext());
@@ -86,7 +87,7 @@ public class HistoryFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String umbrellaNumber = snapshot.getKey();
-                    RowElement temp2 = new RowElement("Tutta la Stagione","0",umbrellaNumber);
+                    RowElement temp2 = new RowElement("Tutta la Stagione","0",umbrellaNumber,0);
                     umbrellaList.add(temp2);
                 }
             }

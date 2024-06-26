@@ -6,6 +6,7 @@ public class OrderItem implements Serializable {
     private final Double prezzo;
     private final String descrizione;
     private final String clientName;
+    private final int orderState;
     private String userId;
 
     public OrderItem(Double price,String descr, String clientName,String userId) {
@@ -13,6 +14,7 @@ public class OrderItem implements Serializable {
         this.descrizione = descr;
         this.clientName = clientName;
         this.userId = userId;
+        orderState = 0;
     }
     public String getDescrizione() {
         return descrizione;
@@ -22,6 +24,9 @@ public class OrderItem implements Serializable {
     }
     public Double getPrezzo() {
         return prezzo;
+    }
+    public int getState() {
+        return orderState;
     }
     public String getUserId(){
         return this.userId;

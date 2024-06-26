@@ -45,8 +45,9 @@ public class provaResoconto extends AppCompatActivity implements printInterface{
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String description = snapshot.child("descrizione").getValue(String.class);
                     String clientName = snapshot.child("clientName").getValue(String.class);
+                    int state = snapshot.child("state").getValue(Integer.class);
                     Double drinkPrice= snapshot.child("prezzo").getValue(Double.class);
-                    RowElement temp = new RowElement(clientName,String.valueOf(drinkPrice),description);
+                    RowElement temp = new RowElement(clientName,String.valueOf(drinkPrice),description,state);
                     drinksList.add(temp);
                 }
                 orderOfDrinksAdapter adapter = new orderOfDrinksAdapter(drinksList, provaResoconto.this,provaResoconto.this);
@@ -110,7 +111,6 @@ public class provaResoconto extends AppCompatActivity implements printInterface{
 
     class PrintTextBGTask extends AsyncTask<String , Integer, Void>
     {
-        int pos;
         String strErrorMessage = null;
         PrinterFont fntPrinterNormal = new PrinterFont();
         PrinterFont fntPrinterName = new PrinterFont();

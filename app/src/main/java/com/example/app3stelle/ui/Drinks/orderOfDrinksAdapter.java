@@ -47,6 +47,11 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
         holder.textViewDrinkList.setText(drinkList);
         holder.clientNameTextView.setText(clientName);
         holder.textViewPrice.setText(orderPrice);
+        switch (element.getOrderState()){
+            case 0:holder.cardViewBox.setCardBackgroundColor(Color.WHITE);break;
+            case 1:holder.cardViewBox.setCardBackgroundColor(ContextCompat.getColor(contex,R.color.yellow));break;
+            case 2:holder.cardViewBox.setCardBackgroundColor(ContextCompat.getColor(contex,R.color.readyGreen));break;
+        }
     }
 
     public void removeItem(int position) {
