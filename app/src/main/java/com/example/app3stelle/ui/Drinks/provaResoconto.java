@@ -60,6 +60,30 @@ public class provaResoconto extends AppCompatActivity implements printInterface{
 
             }
         });
+
+        drinkRef.addValueEventListener(new ValueEventListener() {
+                                             @Override
+                                             public void onDataChange(DataSnapshot dataSnapshot) {
+                                                 drinksList.clear();
+                                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                                     String description = snapshot.child("descrizione").getValue(String.class);
+                                                     String clientName = snapshot.child("clientName").getValue(String.class);
+                                                     int state = snapshot.child("state").getValue(Integer.class);
+                                                     Double drinkPrice= snapshot.child("prezzo").getValue(Double.class);
+                                                     RowElement temp = new RowElement(clientName,String.valueOf(drinkPrice),description,state);
+                                                     drinksList.add(temp);
+                                                 }
+                                                 //orderOfDrinksAdapter adapter2 = new orderOfDrinksAdapter(drinksList, provaResoconto.this,provaResoconto.this);
+                                                 //recyclerViewBeverage.setAdapter(adapter2);
+                                                 recyclerViewBeverage.getAdapter().notifyDataSetChanged();
+                                                 //recyclerViewBeverage.setLayoutManager(new LinearLayoutManager(provaResoconto.this));
+                                             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         OpenDevice();
 
 }
@@ -126,11 +150,11 @@ public class provaResoconto extends AppCompatActivity implements printInterface{
                 fntPrinterNormal.setEmphasized(false);										//No Bold
                 fntPrinterNormal.setItalic(false);											//No Italic
                 fntPrinterNormal.setUnderline(false);										//No Underline
-                fntPrinterNormal.setJustification(PrinterFont.FONT_JUSTIFICATION_RIGHT);	//Center
+                fntPrinterNormal.setJustification(PrinterFont.FONT_JUSTIFICATION_LEFT);	//Center
                 fntPrinterNormal.setInternationalCharSet(PrinterFont.FONT_CS_DEFAULT);		//Default International Chars
 
-                fntPrinterName.setCharHeight(PrinterFont.FONT_SIZE_X2);					//Height x1
-                fntPrinterName.setCharWidth(PrinterFont.FONT_SIZE_X2);					//Width x1
+                fntPrinterName.setCharHeight(PrinterFont.FONT_SIZE_X3);					//Height x1
+                fntPrinterName.setCharWidth(PrinterFont.FONT_SIZE_X3);					//Width x1
                 fntPrinterName.setEmphasized(true);										//No Bold
                 fntPrinterName.setItalic(false);											//No Italic
                 fntPrinterName.setUnderline(true);										//No Underline
