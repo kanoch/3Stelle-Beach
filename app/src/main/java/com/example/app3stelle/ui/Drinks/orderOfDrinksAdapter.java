@@ -60,6 +60,7 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
             case 0:holder.cardViewBox.setCardBackgroundColor(Color.WHITE);break;
             case 1:holder.cardViewBox.setCardBackgroundColor(ContextCompat.getColor(contex,R.color.yellow));break;
             case 2:holder.cardViewBox.setCardBackgroundColor(ContextCompat.getColor(contex,R.color.readyGreen));break;
+            default:break;
         }
     }
 

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app3stelle.MainActivity;
@@ -58,6 +61,12 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> {
         holder.textViewDrinkList.setText(drinkList);
         holder.destinationTextView.setText(drinkDestination);
         holder.textViewPrice.setText(orderPrice);
+        switch (element.getOrderState()){
+            case 0:holder.cardViewContainer.setCardBackgroundColor(Color.WHITE);break;
+            case 1:holder.cardViewContainer.setCardBackgroundColor(ContextCompat.getColor(contex,R.color.yellow));break;
+            case 2:holder.cardViewContainer.setCardBackgroundColor(ContextCompat.getColor(contex,R.color.readyGreen));break;
+        }
+
     }
 
     @Override
@@ -69,6 +78,7 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> {
         TextView destinationTextView;
         TextView textViewDrinkList;
         TextView textViewPrice;
+        CardView cardViewContainer;
         Context cont;
         DatePickerDialog datePickerDialog;
         static int y, d, m;
@@ -83,6 +93,7 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> {
             destinationTextView = itemView.findViewById(R.id.clientNameTextView);
             textViewDrinkList = itemView.findViewById(R.id.textViewDrinkList);
             textViewPrice = itemView.findViewById(R.id.textViewPriceDrink);
+            cardViewContainer = itemView.findViewById(R.id.cardViewBox);
             this.cont= cont;
             calendar = Calendar.getInstance();
             y= calendar.get(Calendar.YEAR);
