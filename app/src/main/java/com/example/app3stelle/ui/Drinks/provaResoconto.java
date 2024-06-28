@@ -87,14 +87,7 @@ public class provaResoconto extends AppCompatActivity implements printInterface{
         OpenDevice();
 
 }
-    /*public void onPrintText(View view)
-    {
-        OpenDevice();
-        if (prnDevice == null)
-            return;
-        new PrintTextBGTask().execute();
 
-    }*/
 
     //Open the device if it isn't already opened
     public boolean OpenDevice()

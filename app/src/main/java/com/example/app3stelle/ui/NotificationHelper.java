@@ -34,11 +34,11 @@ public class NotificationHelper {
 
     public static void showNotification(Context context, String title, String message) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.americano) // Icona della notifica
+                .setSmallIcon(R.drawable.americano)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setAutoCancel(true); // La notifica scompare quando viene cliccata
+                .setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {

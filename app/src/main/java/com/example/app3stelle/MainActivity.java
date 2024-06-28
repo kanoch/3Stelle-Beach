@@ -9,11 +9,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+
+import com.example.app3stelle.ui.MyApp;
 import com.example.app3stelle.ui.MySharedData;
 import com.example.app3stelle.ui.NotificationHelper;
 import com.example.app3stelle.ui.login.LoginManager;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -23,6 +27,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.app3stelle.databinding.ActivityMainBinding;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,6 +68,41 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.POST_NOTIFICATIONS},
                     REQUEST_NOTIFICATION_PERMISSION);
         }
+        DatabaseReference drinkRef = FirebaseDatabase.getInstance().getReference().child("Ordini Drink");
+        drinkRef.orderByChild("userId").equalTo(sharedData.getUserId()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if (snapshot.hasChild("state")) {
+                    final String textNotification;
+                    switch (snapshot.child("state").getValue(Integer.class)){
+                        case 1:textNotification="Ordine in Preparazione"; break;
+                        case 2: textNotification="Ordine Pronto al Ritiro";break;
+                        default:textNotification=""; break;
+                    }
+                    NotificationHelper.showNotification(MyApp.getInstance(), "Ordine Aggiornato", textNotification);
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         //createNotificationChannel();
 
     }
@@ -76,18 +120,4 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Order Updates";
-            String description = "Channel for order update notifications";
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            if (notificationManager != null) {
-                notificationManager.createNotificationChannel(channel);
-            }
-        }
-    }
 }

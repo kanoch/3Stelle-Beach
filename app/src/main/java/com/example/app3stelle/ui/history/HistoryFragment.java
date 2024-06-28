@@ -43,7 +43,7 @@ public class HistoryFragment extends Fragment {
         ArrayList<RowElement> drinksList= new ArrayList<>();
         String idUser = sharedData.getUserId();
         DatabaseReference drinkRef = FirebaseDatabase.getInstance().getReference().child("Ordini Drink");
-        drinkRef.orderByChild("userId").equalTo(idUser).addListenerForSingleValueEvent(new ValueEventListener() {
+       /* drinkRef.orderByChild("userId").equalTo(idUser).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -63,36 +63,7 @@ public class HistoryFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
                 //Log.e("Firebase", "Errore durante il recupero dei dati: " + databaseError.getMessage());
             }
-        });
-
-        drinkRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if (snapshot.hasChild("state")) {
-                    NotificationHelper.showNotification(MyApp.getInstance(), "Ordine Aggiornato", "Il campo è stato modificato: ");
-                }
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        });*/
 
         ArrayList<RowElement> umbrellaList= new ArrayList<>();
         DatabaseReference umbrellaRef = FirebaseDatabase.getInstance().getReference().child("Prenotazioni Lettini");
