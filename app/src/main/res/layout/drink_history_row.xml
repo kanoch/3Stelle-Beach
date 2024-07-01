@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="7dp"
     android:paddingBottom="7dp"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
     android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
@@ -23,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Marco"
                 android:textAlignment="center"
@@ -37,7 +41,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="12dp"
                 android:fontFamily="@font/montserrat_medium"
-                android:text="gin,tonica,bacche" />
+                android:text="gin,tonica,bacche"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textViewPriceDrink"

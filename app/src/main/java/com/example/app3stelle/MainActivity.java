@@ -2,12 +2,8 @@ package com.example.app3stelle;
 
 
 import android.Manifest;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 
 import com.example.app3stelle.ui.MyApp;
@@ -38,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private MySharedData sharedData = MySharedData.getInstance();
-    public static final String CHANNEL_ID = "ORDER_UPDATE_CHANNEL";
     private static final int REQUEST_NOTIFICATION_PERMISSION = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        //createNotificationChannel();
 
     }
 

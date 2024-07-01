@@ -43,7 +43,7 @@ public class HistoryFragment extends Fragment {
         ArrayList<RowElement> drinksList= new ArrayList<>();
         String idUser = sharedData.getUserId();
         DatabaseReference drinkRef = FirebaseDatabase.getInstance().getReference().child("Ordini Drink");
-       /* drinkRef.orderByChild("userId").equalTo(idUser).addListenerForSingleValueEvent(new ValueEventListener() {
+        drinkRef.orderByChild("userId").equalTo(idUser).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -63,7 +63,7 @@ public class HistoryFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
                 //Log.e("Firebase", "Errore durante il recupero dei dati: " + databaseError.getMessage());
             }
-        });*/
+        });
 
         ArrayList<RowElement> umbrellaList= new ArrayList<>();
         DatabaseReference umbrellaRef = FirebaseDatabase.getInstance().getReference().child("Prenotazioni Lettini");
