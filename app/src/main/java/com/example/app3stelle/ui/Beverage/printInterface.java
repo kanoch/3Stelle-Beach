@@ -1,4 +1,4 @@
-package com.example.app3stelle.ui.Drinks;
+package com.example.app3stelle.ui.Beverage;
 
 public interface printInterface {
     void printOrder(int position);

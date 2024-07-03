@@ -1,4 +1,4 @@
-package com.example.app3stelle.ui.Drinks;
+package com.example.app3stelle.ui.Beverage;
 
 import android.app.AlertDialog;
 import android.content.Context;

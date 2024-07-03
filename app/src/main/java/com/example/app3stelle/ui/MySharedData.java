@@ -1,6 +1,6 @@
 package com.example.app3stelle.ui;
 
-import com.example.app3stelle.ui.Drinks.Drink;
+import com.example.app3stelle.ui.Beverage.Drink;
 
 import java.util.ArrayList;
 import java.util.HashMap;

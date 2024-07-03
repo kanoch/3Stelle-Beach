@@ -18,8 +18,7 @@
     <string name="message_updateOrder">Vuoi segnare lo stato dell\' ordine come "In Preparazione"?</string>
     <string name="message_completeOrder">Vuoi segnare lo stato dell\' ordine come "Pronto"?</string>
 
-    <string-array name="opzioni_array">
-        <item>Numero Tavolo</item>
-        <item>Numero Ombrellone</item>
-    </string-array>
+    <string name="beer">Birre</string>
+    <string name="drinks">Cocktails</string>
+    <string name="coffee">Caffè</string>
 </resources>

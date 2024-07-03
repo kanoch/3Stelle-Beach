@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import com.example.app3stelle.databinding.FragmentHomeBinding;
-import com.example.app3stelle.ui.Drinks.DrinkSelectionWindow;
-import com.example.app3stelle.ui.Drinks.provaResoconto;
+import com.example.app3stelle.ui.Beverage.DrinkSelectionWindow;
+import com.example.app3stelle.ui.Beverage.provaResoconto;
 import com.example.app3stelle.ui.Menu.MenuWindow;
 import com.example.app3stelle.ui.UmbrellaBooking;
 
