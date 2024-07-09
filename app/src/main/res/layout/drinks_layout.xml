@@ -1,10 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="#00FFFFFF"
     android:orientation="horizontal"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    android:paddingEnd="10dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -57,6 +58,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="12dp"
                         android:fontFamily="@font/montserrat_medium"
+                        android:paddingEnd="15dp"
                         android:text="gin,tonica,bacche"
                         android:textSize="18sp" />
 

@@ -1,8 +1,12 @@
 package com.example.app3stelle.ui.Beverage;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,6 +18,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,14 +32,18 @@ import com.google.firebase.database.FirebaseDatabase;
 public class DrinkCheckout extends AppCompatActivity {
     private MySharedData sharedData = MySharedData.getInstance();
     private EditText editTextNumberDelivery;
+    private  Button buttonCheckout;
+    private ConstraintLayout mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drink_checkout_layout);
 
+        mainLayout = findViewById(R.id.mainLayout);
+
         editTextNumberDelivery = findViewById(R.id.editTextNumberDelivery);
-        Button buttonCheckout = findViewById(R.id.buttonCheckout);
+        buttonCheckout = findViewById(R.id.buttonCheckout);
         TextView totalTextView = findViewById(R.id.totalTextView);
         ImageButton btnPreviousPage = findViewById(R.id.btnPreviousPage);
         RecyclerView recyclerView = findViewById(R.id.recyclerViewOrder);
@@ -93,7 +103,7 @@ public class DrinkCheckout extends AppCompatActivity {
                         if (databaseError != null) {
                             showConfirmationOrderDialog("Errore nell'invio");
                         } else {
-                            showConfirmationOrderDialog("Ordine Inviato");
+                            animateOrder();
                         }
                     });
                 })
@@ -111,6 +121,60 @@ public class DrinkCheckout extends AppCompatActivity {
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void animateOrder() {
+        int colorFrom = Color.WHITE;
+        int colorTo = Color.GREEN;
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+        colorAnimation.setDuration(400);
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                mainLayout.setBackgroundColor((int) animator.getAnimatedValue());
+            }
+        });
+        colorAnimation.start();
+
+        buttonCheckout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for(int i=0;i< mainLayout.getChildCount();i++){
+                    mainLayout.getChildAt(i).setVisibility(View.GONE);
+                }
+                TextView finalMessage = new TextView(getApplicationContext());
+                finalMessage.setId(View.generateViewId());
+                finalMessage.setText("Ordine Inviato");
+                finalMessage.setTextSize(40);
+                finalMessage.setTextColor(Color.WHITE);
+                finalMessage.setTypeface(Typeface.DEFAULT_BOLD);
+                finalMessage.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
+                ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT
+                );
+                mainLayout.addView(finalMessage, params);
+
+                ConstraintSet constraintSet = new ConstraintSet();
+                constraintSet.clone(mainLayout);
+
+                constraintSet.connect(finalMessage.getId(), ConstraintSet.TOP, mainLayout.getId(), ConstraintSet.TOP, 0);
+                constraintSet.connect(finalMessage.getId(), ConstraintSet.BOTTOM, mainLayout.getId(), ConstraintSet.BOTTOM, 0);
+                constraintSet.connect(finalMessage.getId(), ConstraintSet.LEFT, mainLayout.getId(), ConstraintSet.LEFT, 0);
+                constraintSet.connect(finalMessage.getId(), ConstraintSet.RIGHT, mainLayout.getId(), ConstraintSet.RIGHT, 0);
+
+                constraintSet.applyTo(mainLayout);
+
+                finalMessage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent3 = new Intent(DrinkCheckout.this, MainActivity.class);
+                        startActivity(intent3);
+                    }
+                });
+            }
+        }, 200);
     }
 
 }
