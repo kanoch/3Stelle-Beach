@@ -28,7 +28,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/drinkView"
+                    android:id="@+id/drinkImageView"
                     android:layout_width="134dp"
                     android:layout_height="224dp"
                     android:layout_marginTop="-5dp" />

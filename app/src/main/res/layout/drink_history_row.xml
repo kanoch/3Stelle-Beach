@@ -45,7 +45,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/textViewPriceDrink"
+                android:id="@+id/textViewPriceCoffee"
                 android:layout_width="373dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"

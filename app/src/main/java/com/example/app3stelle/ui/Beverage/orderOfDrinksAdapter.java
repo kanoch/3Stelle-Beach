@@ -87,7 +87,7 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
             itemView.setOnClickListener(this);
             clientNameTextView = itemView.findViewById(R.id.clientNameTextView);
             textViewDrinkList = itemView.findViewById(R.id.textViewDrinkList);
-            textViewPrice = itemView.findViewById(R.id.textViewPriceDrink);
+            textViewPrice = itemView.findViewById(R.id.textViewPriceCoffee);
             cardViewBox = itemView.findViewById(R.id.cardViewBox);
             this.cont= cont;
             this.adapter = adapter;

@@ -92,7 +92,7 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> {
             itemView.setOnLongClickListener(this);
             destinationTextView = itemView.findViewById(R.id.clientNameTextView);
             textViewDrinkList = itemView.findViewById(R.id.textViewDrinkList);
-            textViewPrice = itemView.findViewById(R.id.textViewPriceDrink);
+            textViewPrice = itemView.findViewById(R.id.textViewPriceCoffee);
             cardViewContainer = itemView.findViewById(R.id.cardViewBox);
             this.cont= cont;
             calendar = Calendar.getInstance();

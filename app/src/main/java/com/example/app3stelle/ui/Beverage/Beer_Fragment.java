@@ -40,7 +40,7 @@ public class Beer_Fragment extends Fragment {
                     Drink temp = new Drink(drinkName,drinkPrice,drinkIngredients,drinkPriceCaraffa);
                     drinkList.add(temp);
                 }
-                DrinkAdapter adapter = new DrinkAdapter(beerFragment.getContext(),drinkList,getParentFragmentManager());
+                DrinkAdapter adapter = new DrinkAdapter(beerFragment.getContext(),drinkList,getParentFragmentManager(),R.id.drawer_layout);
                 beerView.setAdapter(adapter);
             }
 

@@ -35,12 +35,10 @@ public class Coffee_Fragment extends Fragment {
                 for (DataSnapshot coffeeSnapshot : dataSnapshot.getChildren()) {
                     String coffeeName = coffeeSnapshot.getKey();
                     String coffeePrice = String.valueOf(coffeeSnapshot.getValue(Double.class));
-                   // String drinkIngredients = drinkSnapshot.child("ingredienti").getValue(String.class);
-                    //String drinkPriceCaraffa = String.valueOf(drinkSnapshot.child("caraffa").getValue(Double.class));
                     Drink temp = new Drink(coffeeName,coffeePrice,"","");
                     drinkList.add(temp);
                 }
-                DrinkAdapter adapter = new DrinkAdapter(coffeeFragment.getContext(),drinkList,getParentFragmentManager());
+                CoffeeAdapter adapter = new CoffeeAdapter(coffeeFragment.getContext(),drinkList,getParentFragmentManager(),R.layout.coffee_layout);
                 coffeeView.setAdapter(adapter);
             }
 

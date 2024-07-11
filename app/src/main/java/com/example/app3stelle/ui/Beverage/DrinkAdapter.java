@@ -18,22 +18,24 @@ import java.util.ArrayList;
 
 public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> {
 
-    private ArrayList<Drink> drinkList;
-    private Context context;
+    protected ArrayList<Drink> drinkList;
+    protected Context context;
     private MySharedData sharedData = MySharedData.getInstance();
-    private ArrayList<Drink> sharedDrinkList = sharedData.getSharedOrderDrinkList();
-    private FragmentManager fragmentManager;
+    protected ArrayList<Drink> sharedDrinkList = sharedData.getSharedOrderDrinkList();
+    protected FragmentManager fragmentManager;
+    protected int layoutSelected;
 
-    public DrinkAdapter(Context context, ArrayList<Drink> drinksList,FragmentManager fragmentManager) {
+    public DrinkAdapter(Context context, ArrayList<Drink> drinksList,FragmentManager fragmentManager, int layoutSelected) {
         this.context = context;
         this.drinkList = drinksList;
         this.fragmentManager = fragmentManager;
+        this.layoutSelected = layoutSelected;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.drinks_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(layoutSelected, parent, false);
         return new ViewHolder(view,fragmentManager);
     }
 
@@ -77,7 +79,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
             textViewIncredient = itemView.findViewById(R.id.textViewIncredient);
             textViewPrice = itemView.findViewById(R.id.textViewPriceDrink);
             btnAddDrink = itemView.findViewById(R.id.buttonAddDrink);
-            drinkImage = itemView.findViewById(R.id.drinkView);
+            drinkImage = itemView.findViewById(R.id.drinkImageView);
 
         }
 

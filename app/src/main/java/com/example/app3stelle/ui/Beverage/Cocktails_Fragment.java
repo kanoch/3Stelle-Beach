@@ -40,7 +40,7 @@ public class Cocktails_Fragment extends Fragment {
                     Drink temp = new Drink(drinkName,drinkPrice,drinkIngredients,drinkPriceCaraffa);
                     drinkList.add(temp);
                 }
-                DrinkAdapter adapter = new DrinkAdapter(cocktailsFragment.getContext(),drinkList,getParentFragmentManager());
+                DrinkAdapter adapter = new DrinkAdapter(cocktailsFragment.getContext(),drinkList,getParentFragmentManager(),R.layout.drinks_layout);
                 cocktailView.setAdapter(adapter);
             }
 
