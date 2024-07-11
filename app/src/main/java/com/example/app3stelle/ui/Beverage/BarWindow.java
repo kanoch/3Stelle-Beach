@@ -26,8 +26,8 @@ import it.custom.printer.api.android.CustomException;
 import it.custom.printer.api.android.CustomPrinter;
 import it.custom.printer.api.android.PrinterFont;
 
-public class provaResoconto extends AppCompatActivity implements printInterface{
-    private String lock="lockAccess";
+public class BarWindow extends AppCompatActivity implements printInterface{
+    private final String lock="lockAccess";
     static CustomPrinter prnDevice = null;
     ArrayList<RowElement> drinksList=null;
     private int printElement;
@@ -50,9 +50,9 @@ public class provaResoconto extends AppCompatActivity implements printInterface{
                     RowElement temp = new RowElement(clientName,String.valueOf(drinkPrice),description,state);
                     drinksList.add(temp);
                 }
-                orderOfDrinksAdapter adapter = new orderOfDrinksAdapter(drinksList, provaResoconto.this,provaResoconto.this);
+                OrderOfBarAdapter adapter = new OrderOfBarAdapter(drinksList, BarWindow.this, BarWindow.this);
                 recyclerViewBeverage.setAdapter(adapter);
-                recyclerViewBeverage.setLayoutManager(new LinearLayoutManager(provaResoconto.this));
+                recyclerViewBeverage.setLayoutManager(new LinearLayoutManager(BarWindow.this));
             }
 
             @Override
@@ -73,10 +73,7 @@ public class provaResoconto extends AppCompatActivity implements printInterface{
                                                      RowElement temp = new RowElement(clientName,String.valueOf(drinkPrice),description,state);
                                                      drinksList.add(temp);
                                                  }
-                                                 //orderOfDrinksAdapter adapter2 = new orderOfDrinksAdapter(drinksList, provaResoconto.this,provaResoconto.this);
-                                                 //recyclerViewBeverage.setAdapter(adapter2);
                                                  recyclerViewBeverage.getAdapter().notifyDataSetChanged();
-                                                 //recyclerViewBeverage.setLayoutManager(new LinearLayoutManager(provaResoconto.this));
                                              }
 
             @Override
@@ -173,8 +170,8 @@ public class provaResoconto extends AppCompatActivity implements printInterface{
             {
                 try
                 {
-                    String[] drinksArray = drinksList.get(printElement).getDrinkList().toString().split(",");
-                    prnDevice.printTextLF(drinksList.get(printElement).getDestination().toString(), fntPrinterName);
+                    String[] drinksArray = drinksList.get(printElement).getDrinkList().split(",");
+                    prnDevice.printTextLF(drinksList.get(printElement).getDestination(), fntPrinterName);
                     for(int i=0;i<drinksArray.length;i++){
                         prnDevice.printTextLF(drinksArray[i], fntPrinterNormal);
                     }
@@ -244,7 +241,7 @@ public class provaResoconto extends AppCompatActivity implements printInterface{
         {
             if (prnDevice != null)
             {
-                Toast.makeText(provaResoconto.this, "Device Open!",Toast.LENGTH_LONG).show();
+                Toast.makeText(BarWindow.this, "Device Open!",Toast.LENGTH_LONG).show();
 
             }
             else

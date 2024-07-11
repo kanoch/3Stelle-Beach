@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class DrinkCheckOut_Adapter extends RecyclerView.Adapter<DrinkCheckOut_Adapter.ViewHolder> {
 
     private ArrayList<Beverage> drinkList;
-    private MySharedData sharedData = MySharedData.getInstance();
-    private Context contex;
+    private final MySharedData sharedData = MySharedData.getInstance();
+    private final Context contex;
 
     public DrinkCheckOut_Adapter(ArrayList<Beverage> drinks, Context contex) {
         this.drinkList = drinks;

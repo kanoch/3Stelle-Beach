@@ -12,7 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import com.example.app3stelle.databinding.FragmentHomeBinding;
 import com.example.app3stelle.ui.Beverage.DrinkSelectionWindow;
-import com.example.app3stelle.ui.Beverage.provaResoconto;
+import com.example.app3stelle.ui.Beverage.BarWindow;
 import com.example.app3stelle.ui.Menu.MenuWindow;
 import com.example.app3stelle.ui.UmbrellaBooking;
 
@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
         CardView cardDrink=binding.CardDrink;
 
         provaaa.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), provaResoconto.class);
+            Intent intent = new Intent(requireContext(), BarWindow.class);
             startActivity(intent);
         });
 

@@ -20,7 +20,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
 
     protected ArrayList<Beverage> drinkList;
     protected Context context;
-    private MySharedData sharedData = MySharedData.getInstance();
+    private final MySharedData sharedData = MySharedData.getInstance();
     protected ArrayList<Beverage> sharedDrinkList = sharedData.getSharedOrderDrinkList();
     protected FragmentManager fragmentManager;
     protected int layoutSelected;
@@ -36,7 +36,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(layoutSelected, parent, false);
-        return new ViewHolder(view,fragmentManager);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -51,13 +51,8 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
         }
         holder.textViewIncredient.setText(drink.getIngredients());
         holder.textViewPrice.setText(drinkPrice);
-        holder.btnAddDrink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheetDrinks.newInstance(drink).show(
-                        fragmentManager, "dialog");
-            }
-        });
+        holder.btnAddDrink.setOnClickListener(v -> BottomSheetDrinks.newInstance(drink).show(
+                fragmentManager, "dialog"));
     }
 
     @Override
@@ -73,7 +68,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
         Button btnAddDrink;
         ImageView drinkImage;
 
-        public ViewHolder(@NonNull View itemView,FragmentManager fragmentManager) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             drinkNameTextView = itemView.findViewById(R.id.drinkNameTextView);
             textViewIncredient = itemView.findViewById(R.id.textViewIncredient);

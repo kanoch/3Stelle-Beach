@@ -39,7 +39,7 @@
         <activity android:name=".ui.Menu.MenuWindow" android:screenOrientation="portrait"/>
         <activity android:name=".ui.login.LoginActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.login.SignUp" android:screenOrientation="portrait"/>
-        <activity android:name="com.example.app3stelle.ui.Beverage.provaResoconto" />
+        <activity android:name="com.example.app3stelle.ui.Beverage.BarWindow" />
     </application>
 
 </manifest>

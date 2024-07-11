@@ -17,8 +17,13 @@
 
     <string name="message_updateOrder">Vuoi segnare lo stato dell\' ordine come "In Preparazione"?</string>
     <string name="message_completeOrder">Vuoi segnare lo stato dell\' ordine come "Pronto"?</string>
+    <string name="message_sendedOrder">Ordine Inviato</string>
 
     <string name="beer">Birre</string>
     <string name="drinks">Cocktails</string>
     <string name="coffee">Caffè</string>
+
+    <string name="single">Singolo</string>
+    <string name="carafe">Caraffa</string>
+    <string name="cup">Tazza</string>
 </resources>

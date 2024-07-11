@@ -7,7 +7,7 @@ public class OrderItem implements Serializable {
     private final String descrizione;
     private final String clientName;
     private final int orderState;
-    private String userId;
+    private final String userId;
 
     public OrderItem(Double price,String descr, String clientName,String userId) {
         this.prezzo = price;

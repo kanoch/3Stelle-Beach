@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.app3stelle.R;
 import com.example.app3stelle.ui.history.RowElement;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,13 +26,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdapter.ViewHolder> {
+public class OrderOfBarAdapter extends RecyclerView.Adapter<OrderOfBarAdapter.ViewHolder> {
 
-    private ArrayList<RowElement> rowElements;
-    private Context contex;
-    private printInterface printInterface;
+    private final ArrayList<RowElement> rowElements;
+    private final Context contex;
+    private final printInterface printInterface;
 
-    public orderOfDrinksAdapter(ArrayList<RowElement> rowElements, Context context, printInterface printInterface) {
+    public OrderOfBarAdapter(ArrayList<RowElement> rowElements, Context context, printInterface printInterface) {
         this.rowElements = rowElements;
         this.contex = context;
         this.printInterface = printInterface;
@@ -42,13 +41,13 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
 
     @NonNull
     @Override
-    public orderOfDrinksAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OrderOfBarAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.drink_history_row, parent, false);
-        return new orderOfDrinksAdapter.ViewHolder(view,contex,this);
+        return new OrderOfBarAdapter.ViewHolder(view,contex,this);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull orderOfDrinksAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OrderOfBarAdapter.ViewHolder holder, int position) {
         RowElement element = rowElements.get(position);
         String clientName = element.getDestination();
         String drinkList = element.getDrinkList();
@@ -81,8 +80,8 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
         TextView textViewPrice;
         CardView cardViewBox;
         Context cont;
-        orderOfDrinksAdapter adapter;
-        public ViewHolder(@NonNull View itemView,Context cont,orderOfDrinksAdapter adapter) {
+        OrderOfBarAdapter adapter;
+        public ViewHolder(@NonNull View itemView, Context cont, OrderOfBarAdapter adapter) {
             super(itemView);
             itemView.setOnClickListener(this);
             clientNameTextView = itemView.findViewById(R.id.clientNameTextView);
@@ -141,12 +140,8 @@ public class orderOfDrinksAdapter extends RecyclerView.Adapter<orderOfDrinksAdap
                                 refOrdini.child(key).removeValue();
                                 break;
                             }
-                            refOrdini.child(key).child("state").setValue(newState).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(cont, "Ordine aggiornato", Toast.LENGTH_SHORT).show();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
+                            refOrdini.child(key).child("state").setValue(newState).addOnSuccessListener(unused ->
+                                    Toast.makeText(cont, "Ordine aggiornato", Toast.LENGTH_SHORT).show()).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Toast.makeText(cont, "Errore Aggiornamento", Toast.LENGTH_SHORT).show();

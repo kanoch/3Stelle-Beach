@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -30,7 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class DrinkCheckout extends AppCompatActivity {
-    private MySharedData sharedData = MySharedData.getInstance();
+    private final MySharedData sharedData = MySharedData.getInstance();
     private EditText editTextNumberDelivery;
     private  Button buttonCheckout;
     private ConstraintLayout mainLayout;
@@ -62,15 +61,12 @@ public class DrinkCheckout extends AppCompatActivity {
 
         buttonCheckout.setOnClickListener(v -> showConfirmationDialog());
 
-        editTextNumberDelivery.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
-                    hideKeyboard(v);
-                    return true;
-                }
-                return false;
+        editTextNumberDelivery.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
+                hideKeyboard(v);
+                return true;
             }
+            return false;
         });
     }
 
@@ -101,7 +97,7 @@ public class DrinkCheckout extends AppCompatActivity {
                     refOrdini.setValue(itm, (databaseError, databaseReference) -> {
                         sharedData.getSharedOrderDrinkList().clear();
                         if (databaseError != null) {
-                            showConfirmationOrderDialog("Errore nell'invio");
+                            showConfirmationOrderDialog();
                         } else {
                             animateOrder();
                         }
@@ -112,9 +108,9 @@ public class DrinkCheckout extends AppCompatActivity {
         dialog.show();
     }
 
-    private void showConfirmationOrderDialog(String message){
+    private void showConfirmationOrderDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(message)
+        builder.setMessage("Errore nell'invio")
                 .setPositiveButton("OK", (dialog, id) -> {
                     Intent intent3 = new Intent(DrinkCheckout.this, MainActivity.class);
                     startActivity(intent3);
@@ -128,52 +124,41 @@ public class DrinkCheckout extends AppCompatActivity {
         int colorTo = Color.GREEN;
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
         colorAnimation.setDuration(400);
-        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animator) {
-                mainLayout.setBackgroundColor((int) animator.getAnimatedValue());
-            }
-        });
+        colorAnimation.addUpdateListener(animator -> mainLayout.setBackgroundColor((int) animator.getAnimatedValue()));
         colorAnimation.start();
 
-        buttonCheckout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for(int i=0;i< mainLayout.getChildCount();i++){
-                    mainLayout.getChildAt(i).setVisibility(View.GONE);
-                }
-                TextView finalMessage = new TextView(getApplicationContext());
-                finalMessage.setId(View.generateViewId());
-                finalMessage.setText("Ordine Inviato");
-                finalMessage.setTextSize(40);
-                finalMessage.setTextColor(Color.WHITE);
-                finalMessage.setTypeface(Typeface.DEFAULT_BOLD);
-                finalMessage.setGravity(View.TEXT_ALIGNMENT_CENTER);
-
-                ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT
-                );
-                mainLayout.addView(finalMessage, params);
-
-                ConstraintSet constraintSet = new ConstraintSet();
-                constraintSet.clone(mainLayout);
-
-                constraintSet.connect(finalMessage.getId(), ConstraintSet.TOP, mainLayout.getId(), ConstraintSet.TOP, 0);
-                constraintSet.connect(finalMessage.getId(), ConstraintSet.BOTTOM, mainLayout.getId(), ConstraintSet.BOTTOM, 0);
-                constraintSet.connect(finalMessage.getId(), ConstraintSet.LEFT, mainLayout.getId(), ConstraintSet.LEFT, 0);
-                constraintSet.connect(finalMessage.getId(), ConstraintSet.RIGHT, mainLayout.getId(), ConstraintSet.RIGHT, 0);
-
-                constraintSet.applyTo(mainLayout);
-
-                finalMessage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent3 = new Intent(DrinkCheckout.this, MainActivity.class);
-                        startActivity(intent3);
-                    }
-                });
+        buttonCheckout.postDelayed(() -> {
+            for(int i=0;i< mainLayout.getChildCount();i++){
+                mainLayout.getChildAt(i).setVisibility(View.GONE);
             }
+            TextView finalMessage = new TextView(getApplicationContext());
+            finalMessage.setId(View.generateViewId());
+            finalMessage.setText(R.string.message_sendedOrder);
+            finalMessage.setTextSize(40);
+            finalMessage.setTextColor(Color.WHITE);
+            finalMessage.setTypeface(Typeface.DEFAULT_BOLD);
+            finalMessage.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
+            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
+                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                    ConstraintLayout.LayoutParams.WRAP_CONTENT
+            );
+            mainLayout.addView(finalMessage, params);
+
+            ConstraintSet constraintSet = new ConstraintSet();
+            constraintSet.clone(mainLayout);
+
+            constraintSet.connect(finalMessage.getId(), ConstraintSet.TOP, mainLayout.getId(), ConstraintSet.TOP, 0);
+            constraintSet.connect(finalMessage.getId(), ConstraintSet.BOTTOM, mainLayout.getId(), ConstraintSet.BOTTOM, 0);
+            constraintSet.connect(finalMessage.getId(), ConstraintSet.LEFT, mainLayout.getId(), ConstraintSet.LEFT, 0);
+            constraintSet.connect(finalMessage.getId(), ConstraintSet.RIGHT, mainLayout.getId(), ConstraintSet.RIGHT, 0);
+
+            constraintSet.applyTo(mainLayout);
+
+            finalMessage.setOnClickListener(v -> {
+                Intent intent3 = new Intent(DrinkCheckout.this, MainActivity.class);
+                startActivity(intent3);
+            });
         }, 200);
     }
 

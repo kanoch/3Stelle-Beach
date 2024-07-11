@@ -29,5 +29,4 @@ public class RowElement implements Serializable {
     public int getOrderState(){
         return orderState;
     }
-    public void setOrderState(int newState){orderState = newState;}
 }

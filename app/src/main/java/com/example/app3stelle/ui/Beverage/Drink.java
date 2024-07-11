@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Drink  extends Beverage implements Serializable {
 
-    private String ingredients;
-    private String caraffaPrice;
+    private final String ingredients;
+    private final String caraffaPrice;
 
     public Drink( String drinkName, String drinkPrice,String ingredients,String caraffaPrice) {
         super(drinkName, drinkPrice, "Singolo");
@@ -21,6 +21,6 @@ public class Drink  extends Beverage implements Serializable {
     }
     @Override
     public String getFinalPrice(){
-        return super.getBeverageSize()=="Singolo"? super.getBeveragePrice():caraffaPrice;
+        return super.getBeverageSize().endsWith("Singolo")? super.getBeveragePrice():caraffaPrice;
     }
 }
