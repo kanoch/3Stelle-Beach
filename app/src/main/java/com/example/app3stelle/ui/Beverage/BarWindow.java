@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app3stelle.R;
-import com.example.app3stelle.ui.history.RowElement;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +28,7 @@ import it.custom.printer.api.android.PrinterFont;
 public class BarWindow extends AppCompatActivity implements printInterface{
     private final String lock="lockAccess";
     static CustomPrinter prnDevice = null;
-    ArrayList<RowElement> drinksList=null;
+    ArrayList<OrderItem> drinksList=null;
     private int printElement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +46,8 @@ public class BarWindow extends AppCompatActivity implements printInterface{
                     String clientName = snapshot.child("clientName").getValue(String.class);
                     int state = snapshot.child("state").getValue(Integer.class);
                     Double drinkPrice= snapshot.child("prezzo").getValue(Double.class);
-                    RowElement temp = new RowElement(clientName,String.valueOf(drinkPrice),description,state);
-                    drinksList.add(temp);
+                    OrderItem orderTmp = new OrderItem(drinkPrice,description,clientName,state);
+                    drinksList.add(orderTmp);
                 }
                 OrderOfBarAdapter adapter = new OrderOfBarAdapter(drinksList, BarWindow.this, BarWindow.this);
                 recyclerViewBeverage.setAdapter(adapter);
@@ -70,8 +69,8 @@ public class BarWindow extends AppCompatActivity implements printInterface{
                                                      String clientName = snapshot.child("clientName").getValue(String.class);
                                                      int state = snapshot.child("state").getValue(Integer.class);
                                                      Double drinkPrice= snapshot.child("prezzo").getValue(Double.class);
-                                                     RowElement temp = new RowElement(clientName,String.valueOf(drinkPrice),description,state);
-                                                     drinksList.add(temp);
+                                                     OrderItem orderTmp = new OrderItem(drinkPrice,description,clientName,state);
+                                                     drinksList.add(orderTmp);
                                                  }
                                                  recyclerViewBeverage.getAdapter().notifyDataSetChanged();
                                              }
@@ -170,12 +169,12 @@ public class BarWindow extends AppCompatActivity implements printInterface{
             {
                 try
                 {
-                    String[] drinksArray = drinksList.get(printElement).getDrinkList().split(",");
-                    prnDevice.printTextLF(drinksList.get(printElement).getDestination(), fntPrinterName);
+                    String[] drinksArray = drinksList.get(printElement).getDescrizione().split(",");
+                    prnDevice.printTextLF(drinksList.get(printElement).getClientName(), fntPrinterName);
                     for(int i=0;i<drinksArray.length;i++){
                         prnDevice.printTextLF(drinksArray[i], fntPrinterNormal);
                     }
-                    prnDevice.printTextLF(drinksList.get(printElement).getDrinkPrice().toString()+"€", fntPrinterName);
+                    prnDevice.printTextLF(drinksList.get(printElement).getPrezzo().toString()+"€", fntPrinterName);
                     prnDevice.feed(3);
                     //Cut (Total)
                     prnDevice.cut(CustomPrinter.CUT_TOTAL);

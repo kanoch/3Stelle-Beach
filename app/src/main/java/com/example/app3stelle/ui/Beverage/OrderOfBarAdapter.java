@@ -28,11 +28,11 @@ import java.util.ArrayList;
 
 public class OrderOfBarAdapter extends RecyclerView.Adapter<OrderOfBarAdapter.ViewHolder> {
 
-    private final ArrayList<RowElement> rowElements;
+    private final ArrayList<OrderItem> rowElements;
     private final Context contex;
     private final printInterface printInterface;
 
-    public OrderOfBarAdapter(ArrayList<RowElement> rowElements, Context context, printInterface printInterface) {
+    public OrderOfBarAdapter(ArrayList<OrderItem> rowElements, Context context, printInterface printInterface) {
         this.rowElements = rowElements;
         this.contex = context;
         this.printInterface = printInterface;
@@ -48,14 +48,14 @@ public class OrderOfBarAdapter extends RecyclerView.Adapter<OrderOfBarAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull OrderOfBarAdapter.ViewHolder holder, int position) {
-        RowElement element = rowElements.get(position);
-        String clientName = element.getDestination();
-        String drinkList = element.getDrinkList();
-        String orderPrice = element.getDrinkPrice()+"€";
+        OrderItem element = rowElements.get(position);
+        String clientName = element.getClientName();
+        String drinkList = element.getDescrizione();
+        String orderPrice = element.getPrezzo()+"€";
         holder.textViewDrinkList.setText(drinkList);
         holder.clientNameTextView.setText(clientName);
         holder.textViewPrice.setText(orderPrice);
-        switch (element.getOrderState()){
+        switch (element.getState()){
             case 0:holder.cardViewBox.setCardBackgroundColor(Color.WHITE);break;
             case 1:holder.cardViewBox.setCardBackgroundColor(ContextCompat.getColor(contex,R.color.yellow));break;
             case 2:holder.cardViewBox.setCardBackgroundColor(ContextCompat.getColor(contex,R.color.readyGreen));break;
