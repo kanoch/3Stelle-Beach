@@ -25,7 +25,7 @@ public class Coffee_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View coffeeFragment = inflater.inflate(R.layout.fragment_coffee_layout, container, false);
-        ArrayList<Drink> drinkList = new ArrayList<>();
+        ArrayList<Beverage> coffeeList = new ArrayList<>();
         RecyclerView coffeeView = coffeeFragment.findViewById(R.id.coffeeRecycleView);
         coffeeView.setLayoutManager(new LinearLayoutManager(getContext()));
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference().child("Caffetteria");
@@ -35,10 +35,10 @@ public class Coffee_Fragment extends Fragment {
                 for (DataSnapshot coffeeSnapshot : dataSnapshot.getChildren()) {
                     String coffeeName = coffeeSnapshot.getKey();
                     String coffeePrice = String.valueOf(coffeeSnapshot.getValue(Double.class));
-                    Drink temp = new Drink(coffeeName,coffeePrice,"","");
-                    drinkList.add(temp);
+                    Beverage temp = new Beverage(coffeeName,coffeePrice,"Tazza");
+                    coffeeList.add(temp);
                 }
-                CoffeeAdapter adapter = new CoffeeAdapter(coffeeFragment.getContext(),drinkList,getParentFragmentManager(),R.layout.coffee_layout);
+                CoffeeAdapter adapter = new CoffeeAdapter(coffeeFragment.getContext(),coffeeList,getParentFragmentManager(),R.layout.coffee_layout);
                 coffeeView.setAdapter(adapter);
             }
 

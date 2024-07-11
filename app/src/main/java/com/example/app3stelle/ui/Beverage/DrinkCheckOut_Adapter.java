@@ -18,11 +18,11 @@ import java.util.ArrayList;
 
 public class DrinkCheckOut_Adapter extends RecyclerView.Adapter<DrinkCheckOut_Adapter.ViewHolder> {
 
-    private ArrayList<Drink> drinkList;
+    private ArrayList<Beverage> drinkList;
     private MySharedData sharedData = MySharedData.getInstance();
     private Context contex;
 
-    public DrinkCheckOut_Adapter(ArrayList<Drink> drinks, Context contex) {
+    public DrinkCheckOut_Adapter(ArrayList<Beverage> drinks, Context contex) {
         this.drinkList = drinks;
         this.contex = contex;
     }
@@ -36,21 +36,17 @@ public class DrinkCheckOut_Adapter extends RecyclerView.Adapter<DrinkCheckOut_Ad
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Drink drink = drinkList.get(position);
-        String src= drink.getDrinkName().toLowerCase().replace(' ','_');
+        Beverage drink = drinkList.get(position);
+        String src= drink.getBeverageName().toLowerCase().replace(' ','_');
         int drawableId = contex.getResources().getIdentifier(src, "drawable", contex.getPackageName());
         holder.imageViewLettino.setImageResource(drawableId);
-        holder.textViewNumeroLettino.setText(drink.getDrinkName());
-        holder.textViewDataPrenotazione.setText(drink.getIngredients());
-        if(drink.getDrinkSize()=="Singolo"){
-            String singleDrink = "Drink: "+ drink.getDrinkPrice();
-            holder.textViewPrezzo.setText(singleDrink);
-        } else {
-            String caraffaDrink = "Caraffa: "+ drink.getCaraffaPrice();
-            holder.textViewPrezzo.setText(caraffaDrink);
+        holder.textViewNumeroLettino.setText(drink.getBeverageName());
+        if(drink instanceof Drink){
+            holder.textViewDataPrenotazione.setText(((Drink) drink).getIngredients());
+            holder.textViewPrezzo.setText(drink.getBeverageSize()+" : "+((Drink) drink).getFinalPrice());
+        } else{
+            holder.textViewPrezzo.setText(drink.getBeverageSize()+" : "+drink.getBeveragePrice()+"€");
         }
-        //holder.textViewPrezzo.setText(drink.getDrinkPrice());
-
         holder.imageViewCestino.setOnClickListener(v -> {
             drinkList.remove(position);
             notifyItemRemoved(position);

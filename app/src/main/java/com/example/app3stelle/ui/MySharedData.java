@@ -1,5 +1,6 @@
 package com.example.app3stelle.ui;
 
+import com.example.app3stelle.ui.Beverage.Beverage;
 import com.example.app3stelle.ui.Beverage.Drink;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.HashMap;
 public class MySharedData {
     private static MySharedData instance;
     private HashMap<String,Double> sharedUmbrellaCartList = new HashMap<>();
-    private ArrayList<Drink> sharedOrderDrinkList = new ArrayList<>();
+    private ArrayList<Beverage> sharedOrderDrinkList = new ArrayList<>();
     private String userId;
     private String userMail;
     private boolean findId = false;
@@ -27,7 +28,7 @@ public class MySharedData {
     public HashMap<String,Double> getSharedUmbrellaCartList(){
         return this.sharedUmbrellaCartList;
     }
-    public ArrayList<Drink> getSharedOrderDrinkList(){
+    public ArrayList<Beverage> getSharedOrderDrinkList(){
         return this.sharedOrderDrinkList;
     }
     public double getTotalUmbrellaCart(){
@@ -43,9 +44,9 @@ public class MySharedData {
     public String getFullOrderDescription(){
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < sharedOrderDrinkList.size(); i++) {
-            stringBuilder.append(sharedOrderDrinkList.get(i).getDrinkSize());
+            stringBuilder.append(sharedOrderDrinkList.get(i).getBeverageSize());
             stringBuilder.append(" ");
-            stringBuilder.append(sharedOrderDrinkList.get(i).getDrinkName());
+            stringBuilder.append(sharedOrderDrinkList.get(i).getBeverageName());
             if (i < sharedOrderDrinkList.size() - 1) {
                 stringBuilder.append(", ");
             }

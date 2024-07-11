@@ -18,14 +18,14 @@ import java.util.ArrayList;
 
 public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> {
 
-    protected ArrayList<Drink> drinkList;
+    protected ArrayList<Beverage> drinkList;
     protected Context context;
     private MySharedData sharedData = MySharedData.getInstance();
-    protected ArrayList<Drink> sharedDrinkList = sharedData.getSharedOrderDrinkList();
+    protected ArrayList<Beverage> sharedDrinkList = sharedData.getSharedOrderDrinkList();
     protected FragmentManager fragmentManager;
     protected int layoutSelected;
 
-    public DrinkAdapter(Context context, ArrayList<Drink> drinksList,FragmentManager fragmentManager, int layoutSelected) {
+    public DrinkAdapter(Context context, ArrayList<Beverage> drinksList,FragmentManager fragmentManager, int layoutSelected) {
         this.context = context;
         this.drinkList = drinksList;
         this.fragmentManager = fragmentManager;
@@ -41,10 +41,10 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Drink drink = drinkList.get(position);
-        String drinkPrice = drink.getDrinkPrice()+"€";
-        holder.drinkNameTextView.setText(drink.getDrinkName());
-        String src= drink.getDrinkName().toLowerCase().replace(' ','_');
+        Drink drink = (Drink)drinkList.get(position);
+        String drinkPrice = drink.getBeveragePrice()+"€";
+        holder.drinkNameTextView.setText(drink.getBeverageName());
+        String src= drink.getBeverageName().toLowerCase().replace(' ','_');
         int drawableId = context.getResources().getIdentifier(src, "drawable", context.getPackageName());
         if(drawableId!=0){
             holder.drinkImage.setImageResource(drawableId);

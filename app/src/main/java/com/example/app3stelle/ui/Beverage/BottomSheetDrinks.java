@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class BottomSheetDrinks extends BottomSheetDialogFragment {
     static Drink currentDrink;
     private MySharedData sharedData = MySharedData.getInstance();
-    private ArrayList<Drink> sharedDrinkList = sharedData.getSharedOrderDrinkList();
+    private ArrayList<Beverage> sharedDrinkList = sharedData.getSharedOrderDrinkList();
 
     public static BottomSheetDrinks newInstance(Drink currentDrinks) {
         currentDrink = currentDrinks;
@@ -32,14 +32,14 @@ public class BottomSheetDrinks extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.bottom_sheet_layout, container, false);
         Button btnGlass = view.findViewById(R.id.btnGlass);
         Button btnCarafe = view.findViewById(R.id.btnCarafe);
-        btnGlass.setText("Bicchiere: €"+currentDrink.getDrinkPrice());
+        btnGlass.setText("Bicchiere: €"+currentDrink.getBeveragePrice());
         btnCarafe.setText("Caraffa: €"+currentDrink.getCaraffaPrice());
 
         btnGlass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Drink tempDrink = new Drink(currentDrink.getDrinkName(),
-                        currentDrink.getDrinkPrice(),
+                Drink tempDrink = new Drink(currentDrink.getBeverageName(),
+                        currentDrink.getBeveragePrice(),
                         currentDrink.getIngredients(),
                         null);
                 sharedDrinkList.add(tempDrink);
@@ -52,11 +52,11 @@ public class BottomSheetDrinks extends BottomSheetDialogFragment {
         btnCarafe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Drink tempDrink = new Drink(currentDrink.getDrinkName(),
-                        currentDrink.getDrinkPrice(),
+                Drink tempDrink = new Drink(currentDrink.getBeverageName(),
+                        currentDrink.getBeveragePrice(),
                         currentDrink.getIngredients(),
                         currentDrink.getCaraffaPrice());
-                tempDrink.setDrinkSize("Caraffa");
+                tempDrink.setBeverageSize("Caraffa");
                 sharedDrinkList.add(tempDrink);
                 Toast.makeText(view.getContext(), "Caraffa Aggiunta all'ordine", Toast.LENGTH_SHORT).show();
                 dismiss();

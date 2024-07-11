@@ -25,7 +25,7 @@ public class Cocktails_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View cocktailsFragment = inflater.inflate(R.layout.fragment_cocktails_layout, container, false);
-        ArrayList<Drink> drinkList = new ArrayList<>();
+        ArrayList<Beverage> drinkList = new ArrayList<>();
         RecyclerView cocktailView = cocktailsFragment.findViewById(R.id.beerRecycleView);
         cocktailView.setLayoutManager(new LinearLayoutManager(getContext()));
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference().child("Drinks");

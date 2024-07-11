@@ -5,6 +5,8 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.app3stelle.ui.MyApp;
 import com.example.app3stelle.ui.MySharedData;
@@ -29,6 +31,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -48,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_home,R.id.nav_coupon, R.id.nav_gallery,R.id.nav_logOut)
                 .setOpenableLayout(drawer)
                 .build();
+        View headerView= navigationView.getHeaderView(0);
+        TextView userTextView  = headerView.findViewById(R.id.textViewUser);
+        userTextView.setText(sharedData.getUserMail());
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
