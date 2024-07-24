@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +28,9 @@ import com.example.app3stelle.R;
 import com.example.app3stelle.ui.MySharedData;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DrinkCheckout extends AppCompatActivity {
     private final MySharedData sharedData = MySharedData.getInstance();
@@ -47,6 +51,8 @@ public class DrinkCheckout extends AppCompatActivity {
         ImageButton btnPreviousPage = findViewById(R.id.btnPreviousPage);
         RecyclerView recyclerView = findViewById(R.id.recyclerViewOrder);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(this,LinearLayoutManager.VERTICAL);
+        recyclerView.addItemDecoration(itemDecoration);
         String totaleEuro = sharedData.getTotalCartDrink() +" €";
         totalTextView.setText(totaleEuro);
 
@@ -87,11 +93,18 @@ public class DrinkCheckout extends AppCompatActivity {
                     String orderDescription = sharedData.getFullOrderDescription();
                     String clientName = editTextNumberDelivery.getText().toString();
 
+                    LocalDateTime now = LocalDateTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    String formattedDateTime = now.format(formatter);
+
+
                     OrderItem itm = new OrderItem(
                             sharedData.getTotalCartDrink(),
                             orderDescription,
                             clientName,
-                            sharedData.getUserId());
+                            sharedData.getUserId(),
+                            formattedDateTime
+                            );
                     refOrdini.setValue(itm);
 
                     refOrdini.setValue(itm, (databaseError, databaseReference) -> {

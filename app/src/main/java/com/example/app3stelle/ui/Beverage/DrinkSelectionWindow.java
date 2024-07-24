@@ -12,14 +12,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.app3stelle.MainActivity;
 import com.example.app3stelle.R;
-import java.util.ArrayList;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.FirebaseApp;
 
 public class DrinkSelectionWindow extends AppCompatActivity {
     private Button btnNextPage;
     private ImageButton imgbuttonBack;
-    private ArrayList<Drink> drinkList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
