@@ -26,4 +26,7 @@
     <string name="single">Singolo</string>
     <string name="carafe">Caraffa</string>
     <string name="cup">Tazza</string>
+
+    <string name="lettini">Lettino</string>
+    <string name="bar">Bar</string>
 </resources>

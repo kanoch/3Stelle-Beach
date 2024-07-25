@@ -61,6 +61,7 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> {
         holder.textViewDrinkList.setText(drinkList);
         holder.destinationTextView.setText(drinkDestination);
         holder.textViewPrice.setText(orderPrice);
+        holder.textViewDrinkDate.setText(element.getDrinkDate());
         switch (element.getOrderState()){
             case 0:holder.cardViewContainer.setCardBackgroundColor(Color.WHITE);break;
             case 1:holder.cardViewContainer.setCardBackgroundColor(ContextCompat.getColor(contex,R.color.yellow));break;
@@ -77,6 +78,7 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
         TextView destinationTextView;
         TextView textViewDrinkList;
+        TextView textViewDrinkDate;
         TextView textViewPrice;
         CardView cardViewContainer;
         Context cont;
@@ -91,6 +93,7 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> {
             super(itemView);
             itemView.setOnLongClickListener(this);
             destinationTextView = itemView.findViewById(R.id.clientNameTextView);
+            textViewDrinkDate  = itemView.findViewById(R.id.textViewDateTime);
             textViewDrinkList = itemView.findViewById(R.id.textViewDrinkList);
             textViewPrice = itemView.findViewById(R.id.textViewPriceCoffee);
             cardViewContainer = itemView.findViewById(R.id.cardViewBox);
