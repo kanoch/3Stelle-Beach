@@ -24,8 +24,6 @@ public class HistoryFragment extends Fragment {
         binding = FragmentHistoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Log.d("cacca","cacca");
-
         TabLayout tabItems = root.findViewById(R.id.tabLayoutCategory2);
         final UmbrellaReservationFragment umbrellaFragment= new UmbrellaReservationFragment();
         UserBarOrderFragment userOrdersFragment = new UserBarOrderFragment();

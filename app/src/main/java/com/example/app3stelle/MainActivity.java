@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 .setOpenableLayout(drawer)
                 .build();
         View headerView= navigationView.getHeaderView(0);
-        TextView userTextView  = headerView.findViewById(R.id.textViewUser);
-        userTextView.setText(sharedData.getUserMail());
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -62,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
             LoginManager logManager = LoginManager.getInstance();
             logManager.onStart(MainActivity.this);
         }
+        TextView userTextView  = headerView.findViewById(R.id.textViewUser);
+        userTextView.setText(sharedData.getUserMail());
         NotificationHelper.createNotificationChannel(this);
         if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(MainActivity.this,
